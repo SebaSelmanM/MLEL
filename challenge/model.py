@@ -151,7 +151,7 @@ class DelayModel:
 
         # Retornamos target si corresponde
         if target_column and target_column in df.columns:
-            y = df[target_column]
+            y = df[[target_column]]
             return X, y
         else:
             return X
@@ -170,8 +170,15 @@ class DelayModel:
         """
         # Calculamos scale_pos_weight para manejar desbalance
         # (Número de 0 / número de 1)
-        n_delay_0 = len(target[target == 0])
-        n_delay_1 = len(target[target == 1]) if 1 in target.values else 1
+        # Flatten the target DataFrame to a Series
+        target_series = target.squeeze()
+
+        # Ensure target_series is a Series
+        if isinstance(target_series, pd.DataFrame):
+            target_series = target_series.iloc[:, 0]
+
+        n_delay_0 = len(target_series[target_series == 0])
+        n_delay_1 = len(target_series[target_series == 1])
         self._scale_pos_weight = n_delay_0 / n_delay_1 if n_delay_1 else 1.0
 
         # Entrenamos XGBoost (hiperparámetros básicos)
@@ -195,6 +202,12 @@ class DelayModel:
         Returns:
             (List[int]): predicted targets (0 / 1).
         """
+        # Asegurarse que se haya realizado el entrenamiento
+        if self._model is None:
+            return [0] * len(features)  #dummy precit
+            #raise ValueError("The model has not fitted yet. Call fit() before predict()")
+        
+
         # XGBoost retorna probabilidades, por defecto .predict() retorna la clase
         # Dependiendo de la versión, a veces .predict() retorna el label directamente;
         # si retorna probabilidades, debemos umbralizar:

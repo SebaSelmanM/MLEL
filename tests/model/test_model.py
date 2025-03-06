@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
 from challenge.model import DelayModel
+import os
 
 class TestModel(unittest.TestCase):
 
@@ -28,7 +29,11 @@ class TestModel(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.model = DelayModel()
-        self.data = pd.read_csv(filepath_or_buffer="../data/data.csv")
+        current_dir = os.path.dirname(__file__)
+        print(current_dir)
+        #self.data = pd.read_csv(filepath_or_buffer="../../data/data.csv")
+        path = "/Users/seba/Documents/Desarrollos/Github/Challenge/MLEL/data/data.csv"
+        self.data = pd.read_csv(filepath_or_buffer=path)
         
 
     def test_model_preprocess_for_training(
@@ -68,6 +73,7 @@ class TestModel(unittest.TestCase):
             target_column="delay"
         )
 
+
         _, features_validation, _, target_validation = train_test_split(features, target, test_size = 0.33, random_state = 42)
 
         self.model.fit(
@@ -75,9 +81,11 @@ class TestModel(unittest.TestCase):
             target=target
         )
 
+
         predicted_target = self.model._model.predict(
             features_validation
         )
+
 
         report = classification_report(target_validation, predicted_target, output_dict=True)
         

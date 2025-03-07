@@ -25,7 +25,7 @@ jobs:
       run: |
         pip install --upgrade pip setuptools wheel
         pip install -r requirements.txt
-        pip install -r requirements-test.txt # Install dependencies and include some extra dependencies for testing
+        pip install -r requirements-test.txt # include some extra dependencies for testing
         
 
     - name: Run tests (Optional but recommended)

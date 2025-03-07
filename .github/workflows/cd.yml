@@ -43,6 +43,10 @@ jobs:
       with:
         project_id: "gcp-api-mle" 
         export_default_credentials: true
+    
+    - name: Configure Docker for GCR
+      run: |
+        gcloud auth configure-docker --quiet
 
     - name: Build and push Docker image
       run: |

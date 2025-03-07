@@ -33,6 +33,7 @@ Pydantic classes have extra = "forbid", ensuring any unknown columns lead to a v
 Testing (make api-test)
 Adjusted the JSON structure to match what the test suite expects: {"flights": [...]}.
 Returns a 400 error when encountering unknown or invalid fields; otherwise 200 with {"predict": [...]}.
+
 ## Part III: Deploying to GCP (Cloud Run)
 
 **Objective: Deploy the API to Google Cloud Platform.**
@@ -43,15 +44,16 @@ Installs dependencies via pip install -r requirements.txt.
 Copies the code into the container (COPY . /app).
 Uses uvicorn challenge.api:app --host 0.0.0.0 --port 8080 to serve the API.
 Publishing to Container Registry
-docker build -t gcr.io/<PROJECT_ID>/<IMAGE_NAME>:v1 .
-docker push gcr.io/<PROJECT_ID>/<IMAGE_NAME>:v1
+docker build -t gcr.io...
+docker push gcr.io/...
 Deploying on Cloud Run
-gcloud run deploy <SERVICE_NAME> --image gcr.io/<PROJECT_ID>/<IMAGE_NAME>:v1 --region <REGION> --platform managed --allow-unauthenticated
-Obtained a URL like: https://<SERVICE_NAME>-xxxxxxx-uc.a.run.app.
+gcloud run deploy ...
+Obtained a URL 
 Stress Testing (make stress-test)
 Updated line 26 in the Makefile to point API_URL to the new Cloud Run URL.
 Installed Locust for load testing.
 make stress-test then sends concurrent requests against the deployed API.
+
 ## Part IV: CI/CD Implementation (GitHub Actions)
 
 **Objective: Provide a proper CI/CD approach in the .github/workflows folder.**

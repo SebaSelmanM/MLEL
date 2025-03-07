@@ -26,7 +26,10 @@ jobs:
         pip install --upgrade pip setuptools wheel
         pip install -r requirements.txt
         pip install -r requirements-test.txt # include some extra dependencies
-        
+     
+    - name: Install compatible Jinja2
+      run: |
+        pip install 'jinja2<3.1'
 
     - name: Run tests (Optional but recommended)
       run: |

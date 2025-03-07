@@ -27,9 +27,10 @@ jobs:
         pip install -r requirements.txt
         pip install -r requirements-test.txt # include some extra dependencies
      
-    - name: Install compatible Jinja2
+    - name: Install compatible libraries
       run: |
         pip install 'jinja2<3.1'
+        pip install "itsdangerous<2.1"
 
     - name: Run tests (Optional but recommended)
       run: |

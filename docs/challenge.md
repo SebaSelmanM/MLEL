@@ -65,7 +65,7 @@ Uses actions/checkout@v3, actions/setup-python@v4, etc.
 cd.yml
 Triggered on pushes to main or via manual dispatch.
 Authenticates with GCP (Service Account Key).
-Builds and pushes the Docker image to gcr.io/<PROJECT_ID>.
+Builds and pushes the Docker image to gcr.io/gcp-api-mle
 Deploys to Cloud Run using gcloud run deploy.
 Optionally, runs make stress-test to verify performance in production.
 Benefits

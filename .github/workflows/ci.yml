@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip setuptools wheel
-        pip install -r requirements.txt
+        pip install -r requirements.txt # Install dependencies and include some extra dependencies for testing
         
 
     - name: Run Model Tests

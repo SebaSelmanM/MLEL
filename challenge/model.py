@@ -2,6 +2,14 @@ import pandas as pd
 
 from typing import Tuple, Union, List
 
+<<<<<<< Updated upstream
+=======
+# Modelos y utilidades
+import xgboost as xgb
+print(f"XGBoost version: {xgb.__version__}")
+from datetime import datetime
+
+>>>>>>> Stashed changes
 class DelayModel:
 
     def __init__(

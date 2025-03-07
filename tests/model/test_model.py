@@ -28,7 +28,9 @@ class TestModel(unittest.TestCase):
     def setUp(self) -> None:
         super().setUp()
         self.model = DelayModel()
-        self.data = pd.read_csv(filepath_or_buffer="../data/data.csv")
+        #self.data = pd.read_csv(filepath_or_buffer="../../data/data.csv")
+        path = "/Users/seba/Documents/Desarrollos/Github/Challenge/MLEL/data/data.csv"
+        self.data = pd.read_csv(filepath_or_buffer=path)
         
 
     def test_model_preprocess_for_training(

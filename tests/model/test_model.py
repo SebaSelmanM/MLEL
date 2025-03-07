@@ -1,5 +1,6 @@
 import unittest
 import pandas as pd
+import os
 
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
@@ -29,7 +30,8 @@ class TestModel(unittest.TestCase):
         super().setUp()
         self.model = DelayModel()
         #self.data = pd.read_csv(filepath_or_buffer="../../data/data.csv")
-        path = "/Users/seba/Documents/Desarrollos/Github/Challenge/MLEL/data/data.csv"
+        #path = "/Users/seba/Documents/Desarrollos/Github/Challenge/MLEL/data/data.csv"
+        path = os.path.join(os.path.dirname(__file__), '../../data/data.csv')
         self.data = pd.read_csv(filepath_or_buffer=path)
         
 

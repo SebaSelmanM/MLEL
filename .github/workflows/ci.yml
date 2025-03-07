@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  # Execute CI in each push to any branch and each pull request
+  push:
+    branches: [ "*" ]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.9"
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
+        
+
+    - name: Run Model Tests
+      run: make model-test
+
+    - name: Run API Tests
+      run: make api-test
